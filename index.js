@@ -24,3 +24,38 @@ function convertToRoman(num) {
   
     return result;
   }
+
+//   Caesar Cipher in Javascript
+
+function rot13(str) {
+
+const alpha="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let ans="";
+  for(let i=0;i<str.length; i++){
+
+    const char=str[i];
+    if(char===" " || char==="!" || char==="?" || char==="."){
+      ans+=char;
+    }
+    else{
+         const val=alpha.indexOf(str[i]);
+         const new_val=(val+13)%26;
+         ans+=alpha[new_val];
+    }
+  }
+  return ans;
+}
+
+
+rot13("SERR PBQR PNZC");
+
+
+
+// Telephone Number Validator
+
+function telephoneCheck(str) {
+    let regExp = /^(1\s?)?(\d{3}|\(\d{3}\))[\-\s]?\d{3}[\-\s]?\d{4}$/
+    return regExp.test(str);
+  }
+  
+  console.log(telephoneCheck("555-555-5555"));
