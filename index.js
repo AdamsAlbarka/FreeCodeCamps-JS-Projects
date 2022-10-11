@@ -45,11 +45,7 @@ let ans="";
   }
   return ans;
 }
-
-
 rot13("SERR PBQR PNZC");
-
-
 
 // Telephone Number Validator
 
