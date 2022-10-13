@@ -156,3 +156,29 @@ const frontEndFrameworks = [
       </div>
     );
   };
+
+  // REDUX FCC_TUTORIALS
+  // How to declare a state in Redux
+  const store = Redux.createStore(
+    (state = 5) => state
+  );
+  
+  // Get state in Redux and passed into a new var
+  const currentState = store.getState()
+  
+  console.log(currentState)
+
+  // Define an action here:
+  let action = {
+    type: 'LOGIN'
+  }
+
+  // An action creator is simply a JavaScript function that returns an action. 
+  // In other words, action creators create objects that represent action events.
+  
+  // Define an action creator here:
+  const actionCreator = () => {
+    return action
+  }
+
+
