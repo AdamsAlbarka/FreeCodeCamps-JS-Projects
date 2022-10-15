@@ -302,3 +302,62 @@ const addNoteText = (note) => {
 console.log(store.getState());
 store.dispatch(addNoteText('Hello!'));
 console.log(store.getState());
+
+
+// NEVER MUTATE STATE
+
+const ADD_TO_DO = 'ADD_TO_DO';
+
+// A list of strings representing tasks to do:
+const todos = [
+  'Go to the store',
+  'Clean the house',
+  'Cook dinner',
+  'Learn to code',
+];
+
+const immutableReducer = (state = todos, action) => {
+  switch(action.type) {
+    case ADD_TO_DO:
+      // Don't mutate state here or the tests will fail
+      return state.concat(action.todo)
+    default:
+      return state;
+  }
+};
+
+const addToDo = (todo) => {
+  return {
+    type: ADD_TO_DO,
+    todo
+  }
+}
+// const store = Redux.createStore(immutableReducer);
+
+
+// Spread Operator
+
+const imutableReducer = (state = ['Do not mutate state!'], action) => {
+  switch(action.type) {
+    case 'ADD_TO_DO':
+      // Don't mutate state here or the tests will fail
+      let newArr = [...state, action.todo] // ...state: former array. actiom.todo: new array
+      return newArr
+    default:
+      return state;
+  }
+};
+
+const adToDo = (todo) => {
+  return {
+    type: 'ADD_TO_DO',
+    todo
+  }
+}
+
+// REMOVE FROM ARRAY WOTHOUT MUTATING
+
+// [
+//   ...state.slice(0, action.index),
+//   ...state.slice(action.index + 1, state.length)
+// ];
