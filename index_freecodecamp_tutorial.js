@@ -403,16 +403,16 @@ const messageReducer = (state = [ ], action) => {
   // CONNECTING REACT AND REDUX
 
   // REDUX HERE:
-const ADD = 'ADD';
+// const ADD = 'ADD';
 
-const addMessage = (message) => {
+const addMesage = (message) => {
   return {
     type: ADD,
     message
   }
 };
 
-const messageReducer = (state = [], action) => {
+const messageRducer = (state = [], action) => {
   switch (action.type) {
     case ADD:
       return [
@@ -426,7 +426,7 @@ const messageReducer = (state = [], action) => {
 
 
 
-const store = Redux.createStore(messageReducer);
+// const store = Redux.createStore(messageReducer);
 
 // REACT HERE:
 
