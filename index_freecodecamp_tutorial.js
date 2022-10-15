@@ -111,7 +111,6 @@ class GateKeeper extends React.Component {
     render() {
       const items = this.state.toDoList.map(todoList => <li> {todoList} </li>)
       
-  
       return (
         <div>
           <textarea
@@ -361,3 +360,131 @@ const adToDo = (todo) => {
 //   ...state.slice(0, action.index),
 //   ...state.slice(action.index + 1, state.length)
 // ];
+
+// OBJECT UPDATING
+// const newObject = Object.assign({}, obj1, obj2);
+// This creates newObject as a new object, 
+// which contains the properties that currently exist in obj1 and obj2.
+
+// STATE LOGIC/TEMPLATE TO REACT
+
+// Define ADD, addMessage(), messageReducer(), and store here:
+const AD = 'ADD'
+
+// let action = {
+//     type: AD
+// }
+
+const addMessage = (message) => {
+    return {
+      type: ADD,
+      message
+    }
+}
+
+
+const messageReducer = (state = [ ], action) => {
+
+  switch (action.type) {
+    case ADD:
+      return [...state, action.message];
+      break;
+    default:
+      return state;
+
+  }
+}
+  
+  // const store = Redux.createStore(messageReducer);
+
+
+
+
+  // CONNECTING REACT AND REDUX
+
+  // REDUX HERE:
+const ADD = 'ADD';
+
+const addMessage = (message) => {
+  return {
+    type: ADD,
+    message
+  }
+};
+
+const messageReducer = (state = [], action) => {
+  switch (action.type) {
+    case ADD:
+      return [
+        ...state,
+        action.message
+      ];
+    default:
+      return state;
+  }
+};
+
+
+
+const store = Redux.createStore(messageReducer);
+
+// REACT HERE:
+
+class DisplayMessages extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+      messages: []
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.submitMessage = this.submitMessage.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      input: event.target.value
+    });
+  }
+  submitMessage() {  
+    this.setState((state) => {
+      const currentMessage = state.input;
+      return {
+        input: '',
+        messages: state.messages.concat(currentMessage)
+      };
+    });
+  }
+  render() {
+    return (
+      <div>
+        <h2>Type in a new Message:</h2>
+        <input
+          value={this.state.input}
+          onChange={this.handleChange}/><br/>
+        <button onClick={this.submitMessage}>Submit</button>
+        <ul>
+          {this.state.messages.map( (message, idx) => {
+              return (
+                 <li key={idx}>{message}</li>
+              )
+            })
+          }
+        </ul>
+      </div>
+    );
+  }
+};
+
+const Provider = ReactRedux.Provider;
+
+class AppWrapper extends React.Component {
+  // Render the Provider below this line
+render () {
+  return (
+    <Provider store={store}>
+  <DisplayMessages />
+    </Provider>
+  )
+}
+  // Change code above this line
+}; 
